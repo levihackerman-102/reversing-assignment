@@ -1,64 +1,23 @@
-section .data
-    getplaintext db "Enter the text to be encrypted"  ; max input length: 100
-    len1 equ $ - getplaintext
-    getkey db "Enter the xor key"                     ; single char only
-    len2 equ $ - getkey
-
-section .bss
-    plaintext resb 100 ; reserve 100 bytes for plaintext to be encrypted
-    key resb 1         ; reserve 1 byte for xor key
-
 section .text
     global _start
 
-_start: 
-    call _printText1
-    call _input1
-    call _printText2
-    call _input2
 
-    mov esi, key
-    mov edi, plaintext
-    mov ecx, len1
+_start:     ;tells linker entry point
+    ; simple hello world program
+    mov	edx,len     ;message length
+    mov	ecx,msg     ;message to write
+    mov	ebx,1       ;file descriptor (stdout)
+    mov	eax,4       ;system call number (sys_write)
+    int	0x80        ;call kernel
 
-    xorloop:
-        lodsb
-        xor al, [key]
-        stosb
-        loop xorloop
-        
-    mov rax, 60
-    mov rdi, 0
-    syscall
+    mov	eax,1       ;system call number (sys_exit)
+    int	0x80        ;call kernel
 
-_printText1:
-    mov rax, 1
-    mov rdi, 1
-    mov rsi, getplaintext
-    mov rdx, len1
-    syscall
-    ret
 
-_input1:
-    mov rax, 0
-    mov rdi, 0
-    mov rsi, plaintext
-    mov rdx, 100
-    syscall
-    ret
+section .data
+    msg db 'Hello, world!', 0xa  ;string to be printed
+    len equ $ - msg     ;length of the string
 
-_printText2:
-    mov rax, 1
-    mov rdi, 1
-    mov rsi, getkey
-    mov rdx, len2
-    syscall
-    ret
 
-_input2:
-    mov rax, 0
-    mov rdi, 0
-    mov rsi, key
-    mov rdx, 1
-    syscall
-    ret
+section .bss
+
