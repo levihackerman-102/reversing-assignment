@@ -1,2 +1,4 @@
 *.o
-xor-cipher
+/xor-cipher
+bin
+main
