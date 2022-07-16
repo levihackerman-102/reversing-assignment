@@ -4,15 +4,11 @@ SECTION .bss
     input_bytes: resb 255
     key_value: resb 255
     output: resb 255
-
+	
 
 SECTION .data
-    inputMsg db 'Enter the text to be encrypted : '  ;string to be printed
+    inputMsg db 'Enter the text to be encrypted and the key : ',0xa  ;string to be printed
     inputMsgLen equ $ - inputMsg     ;length of the string
-    
-    keyInputMsg db 'Enter the key : '  ;string to be printed
-    keyInputMsgLen equ $ - keyInputMsg     ;length of the string
-
 
 SECTION .text
     global _start
@@ -41,17 +37,13 @@ input:
 
     inputString input_bytes, 255
 
-    call newline
-
-    mov edx, keyInputMsg
-    mov ecx, keyInputMsgLen
-    mov ebx, 1
-    mov eax, 4
-    int 0x80
+	call newline
 
     inputString key_value, 255
 
     call newline
+	
+	ret
 
 singlechar_xor:
     push edx
