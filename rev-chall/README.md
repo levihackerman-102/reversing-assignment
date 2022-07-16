@@ -49,7 +49,7 @@ The disassembly in gdb with comments after testing:
    0x0000555555400773 <+169>:   movzx  eax,BYTE PTR [rax]
    0x0000555555400776 <+172>:   movsx  eax,al
    0x0000555555400779 <+175>:   add    eax,edx // add ascii value of key[4] to edx
-   0x000055555540077b <+177>:   cmp    eax,0x12c // check if [edx] == 0x12c
+   0x000055555540077b <+177>:   cmp    eax,0x12c // check if [edx] == 0x12c i.e. key[1]+key[2]+key[3] == 300
    0x0000555555400780 <+182>:   je     0x55555540078c <main+194>
    0x0000555555400782 <+184>:   mov    eax,0x0
    0x0000555555400787 <+189>:   call   0x55555540079f <sorrybro> // wrong key, try again :/

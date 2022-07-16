@@ -1,4 +1,5 @@
 *.o
-/xor-cipher
+xor-cipher-asm/xor-cipher/xor-cipher
 bin
 main
+.vscode/
